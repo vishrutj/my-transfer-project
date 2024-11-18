@@ -1,0 +1,33 @@
+# models/intermediate/payments/schema.yml
+version: 2
+
+models:
+  - name: int_payments_transactions
+    description: "Enriched transaction data with payment details"
+    columns:
+      - name: transaction_id
+        tests:
+          - unique
+          - not_null
+      - name: price_cents
+        tests:
+          - not_null
+
+  - name: int_payments_appointments
+    description: "Enriched appointment data with location details"
+    columns:
+      - name: appointment_id
+        tests:
+          - unique
+          - not_null
+      - name: province
+        tests:
+          - not_null
+
+  - name: int_payments_tax_details
+    description: "Aggregated tax amounts by transaction"
+    columns:
+      - name: transaction_id
+        tests:
+          - unique
+          - not_null

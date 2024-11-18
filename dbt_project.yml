@@ -21,6 +21,24 @@ clean-targets:         # directories to be removed by `dbt clean`
     - "dbt_modules"
 
 models:
-    dap:
-        enabled: true
-        materialized: table
+  my_transfer_project:
+    staging_coreruby:
+      +materialized: view
+      +schema: staging
+      +enabled: true         # Always enabled in all environments
+    
+    intermediate:
+      +materialized: table
+      +schema: intermediate
+      +enabled: true         # Always enabled in all environments
+      payments:
+        +schema: int_payments
+      services:
+        +schema: int_services
+    
+    marts:
+      +materialized: table
+      +schema: marts
+      finance:
+        +schema: finance_mart
+        +enabled: "{{ target.name in ['prod', 'preprod'] }}"  # Only in prod/preprod

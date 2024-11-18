@@ -1,0 +1,26 @@
+domain_dbt:          
+  target: dev        
+  outputs:
+    dev:            
+      type: bigquery
+      method: service-account
+      project: "{{ env_var('DBT_TGT_PROJECT') }}"
+      dataset: "{{ env_var('DBT_GCP_DATASET') }}"
+      location: "{{ env_var('BQ_LOCATION') }}"
+      threads: 4
+      
+    preprod:        
+      type: bigquery
+      method: service-account
+      project: "{{ env_var('DBT_TGT_PROJECT') }}"
+      dataset: "{{ env_var('DBT_GCP_DATASET') }}"
+      location: "{{ env_var('BQ_LOCATION') }}"
+      threads: 4
+      
+    prod:
+      type: bigquery
+      method: service-account
+      project: "{{ env_var('DBT_TGT_PROJECT') }}"
+      dataset: "{{ env_var('DBT_GCP_DATASET') }}"
+      location: "{{ env_var('BQ_LOCATION') }}"
+      threads: 8

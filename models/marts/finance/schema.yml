@@ -1,0 +1,31 @@
+# models/marts/finance/schema.yml
+version: 2
+
+models:
+  - name: fct_payment_transactions
+    description: "Fact table for payment transactions (replaces m0_report)"
+    columns:
+      - name: RECEIPT_NUMBER
+        tests:
+          - unique
+          - not_null
+      - name: PAYMENT_AMOUNT
+        tests:
+          - not_null
+      - name: SIGN
+        tests:
+          - accepted_values:
+              values: ['+', '-']
+
+  - name: fct_payment_tax_details
+    description: "Fact table for payment tax details (replaces m1_report)"
+    columns:
+      - name: RECEIPT_NUMBER
+        tests:
+          - not_null
+      - name: PRODUCT_CODE
+        tests:
+          - not_null
+      - name: AMOUNT
+        tests:
+          - not_null
